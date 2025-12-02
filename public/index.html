@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Money | Ganhe 20MT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --dark: #1e293b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: #f8fafc;
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 12px;
+            font-size: 13px;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+        
+        .logo-icon {
+            background: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        h1 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+        
+        .balance-card {
+            background: white;
+            border-radius: 10px;
+            padding: 16px;
+            margin: 12px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--accent);
+        }
+        
+        .balance-info h2 {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 3px;
+        }
+        
+        .balance-amount {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .balance-amount span {
+            color: var(--primary);
+        }
+        
+        .reward-icon {
+            background: linear-gradient(135deg, var(--accent), #fbbf24);
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        .tasks-container {
+            margin-bottom: 20px;
+        }
+        
+        .task-card {
+            background: white;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            position: relative;
+        }
+        
+        .task-card.locked {
+            opacity: 0.6;
+        }
+        
+        .task-card.completed {
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .task-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .task-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .task-number {
+            background: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        
+        .task-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+        
+        .task-reward {
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 0.85rem;
+        }
+        
+        .task-description {
+            color: var(--gray);
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .progress-container {
+            margin: 8px 0;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            margin-bottom: 4px;
+            color: var(--gray);
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), #6d28d9);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        .btn {
+            padding: 8px 14px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: #4338ca;
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #0da271;
+        }
+        
+        .btn:disabled {
+            background: #f1f5f9;
+            color: var(--gray);
+            cursor: not-allowed;
+        }
+        
+        .btn-completed {
+            background: #d1fae5;
+            color: var(--secondary);
+            cursor: default;
+        }
+        
+        .counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            margin: 6px 0;
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        .counter .active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .verifying {
+            font-size: 0.75rem;
+            color: var(--primary);
+            text-align: center;
+            margin-top: 6px;
+            display: none;
+        }
+        
+        .withdraw-container {
+            margin-top: 20px;
+        }
+        
+        .withdraw-card {
+            background: white;
+            border-radius: 10px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            text-align: center;
+            border: 2px dashed #e2e8f0;
+        }
+        
+        .withdraw-card.active {
+            border-color: var(--secondary);
+            background: #f0fdf4;
+        }
+        
+        .withdraw-amount {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin: 8px 0;
+        }
+        
+        .status-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--secondary);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+        
+        .footer {
+            text-align: center;
+            color: var(--gray);
+            padding: 15px 0;
+            font-size: 0.7rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        .verifying .loading {
+            width: 8px;
+            height: 8px;
+            border-width: 1.5px;
+            margin-right: 4px;
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+                font-size: 12px;
+            }
+            
+            .container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <h1>Ganhe 20MT</h1>
+            </div>
+            <p class="subtitle">Complete as tarefas para receber seu dinheiro</p>
+        </header>
+        
+        <div class="balance-card">
+            <div class="balance-info">
+                <h2>Saldo Disponível</h2>
+                <div class="balance-amount"><span id="balance">0</span> MT</div>
+            </div>
+            <div class="reward-icon">
+                <i class="fas fa-wallet"></i>
+            </div>
+        </div>
+        
+        <div class="tasks-container">
+            <div class="task-card" id="task1">
+                <div class="task-header">
+                    <div class="task-title">
+                        <div class="task-number">1</div>
+                        <div class="task-name">Partilhar no WhatsApp</div>
+                    </div>
+                    <div class="task-reward">10 MT</div>
+                </div>
+                <p class="task-description">Compartilhe nosso link em 5 grupos ou conversas do WhatsApp.</p>
+                
+                <div class="counter">
+                    <span>Progresso: </span>
+                    <span id="whatsapp-counter">0/5</span>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress1"></div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" id="btn-task1">
+                    <i class="fab fa-whatsapp"></i> Compartilhar Agora
+                </button>
+                <div class="verifying" id="verifying1">
+                    <div class="loading"></div> Verificando...
+                </div>
+            </div>
+            
+            <div class="task-card locked" id="task2">
+                <div class="task-header">
+                    <div class="task-title">
+                        <div class="task-number">2</div>
+                        <div class="task-name">Fazer Cadastro</div>
+                    </div>
+                    <div class="task-reward">10 MT</div>
+                </div>
+                <p class="task-description">Cadastre-se na nossa plataforma para validar sua conta.</p>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress2"></div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" id="btn-task2" disabled>
+                    <i class="fas fa-user-plus"></i> Ir para Cadastro
+                </button>
+                <div class="verifying" id="verifying2">
+                    <div class="loading"></div> Verificando...
+                </div>
+            </div>
+        </div>
+        
+        <div class="withdraw-container">
+            <div class="withdraw-card" id="withdraw-card">
+                <div style="font-size: 0.9rem; font-weight: 600; color: var(--dark);">
+                    <i class="fas fa-money-check-alt"></i> Levantar Dinheiro
+                </div>
+                <div class="withdraw-amount" id="withdraw-amount">0 MT</div>
+                <p style="font-size: 0.75rem; color: var(--gray); margin-bottom: 12px;">
+                    Complete as tarefas acima para liberar
+                </p>
+                <button class="btn btn-secondary" id="btn-withdraw" disabled>
+                    <i class="fas fa-lock"></i> Aguardando conclusão
+                </button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Complete todas as tarefas para receber 20 MT</p>
+        </div>
+    </div>
+    
+    <script>
+        // Estado do aplicativo
+        const state = {
+            balance: 0,
+            tasks: {
+                task1: { 
+                    completed: false, 
+                    reward: 10, 
+                    progress: 0, 
+                    max: 5,
+                    verifying: false,
+                    verificationTime: 10000 // 10 segundos
+                },
+                task2: { 
+                    completed: false, 
+                    reward: 10, 
+                    progress: 0, 
+                    max: 1,
+                    verifying: false,
+                    verificationTime: 30000 // 30 segundos
+                }
+            }
+        };
+        
+        // Elementos DOM
+        const balanceElement = document.getElementById('balance');
+        const whatsappCounter = document.getElementById('whatsapp-counter');
+        const progress1 = document.getElementById('progress1');
+        const progress2 = document.getElementById('progress2');
+        const withdrawCard = document.getElementById('withdraw-card');
+        const withdrawAmount = document.getElementById('withdraw-amount');
+        const btnWithdraw = document.getElementById('btn-withdraw');
+        
+        // Botões
+        const btnTask1 = document.getElementById('btn-task1');
+        const btnTask2 = document.getElementById('btn-task2');
+        
+        // Elementos de verificação
+        const verifying1 = document.getElementById('verifying1');
+        const verifying2 = document.getElementById('verifying2');
+        
+        // Cards
+        const task1Card = document.getElementById('task1');
+        const task2Card = document.getElementById('task2');
+        
+        // Inicializar
+        function init() {
+            loadState();
+            updateUI();
+            setupEventListeners();
+        }
+        
+        // Configurar listeners
+        function setupEventListeners() {
+            // Tarefa 1: WhatsApp
+            btnTask1.addEventListener('click', () => {
+                if (state.tasks.task1.verifying || state.tasks.task1.completed) return;
+                
+                // Abrir WhatsApp
+                const text = "Olá! Encontrei este site onde você pode ganhar 20MT completando apenas 2tarefas 5 minutos! Experimente: https://claim-money.vercel.app";
+                const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+                window.open(url, '_blank');
+                
+                // Iniciar verificação
+                startVerification('task1');
+            });
+            
+            // Tarefa 2: Cadastro
+            btnTask2.addEventListener('click', () => {
+                if (state.tasks.task2.verifying || !state.tasks.task1.completed) return;
+                
+                // Abrir link de cadastro
+                window.open('https://media1.placard.co.mz/redirect.aspx?pid=5905&bid=1690', '_blank');
+                
+                // Iniciar verificação
+                startVerification('task2');
+            });
+            
+            // Botão para levantar dinheiro
+            btnWithdraw.addEventListener('click', () => {
+                if (!state.tasks.task1.completed || !state.tasks.task2.completed) return;
+                
+                // Abrir link para levantar dinheiro
+                window.open('https://otieu.com/4/9655396', '_blank');
+            });
+        }
+        
+        // Iniciar verificação
+        function startVerification(taskId) {
+            const task = state.tasks[taskId];
+            task.verifying = true;
+            
+            // Mostrar indicador de verificação
+            const verifyingElement = taskId === 'task1' ? verifying1 : verifying2;
+            verifyingElement.style.display = 'block';
+            
+            // Desativar botão durante a verificação
+            const button = taskId === 'task1' ? btnTask1 : btnTask2;
+            button.disabled = true;
+            button.innerHTML = `<div class="loading"></div> Verificando...`;
+            
+            // Após o tempo definido, completar o passo
+            setTimeout(() => {
+                completeTaskStep(taskId);
+            }, task.verificationTime);
+        }
+        
+        // Completar um passo da tarefa
+        function completeTaskStep(taskId) {
+            const task = state.tasks[taskId];
+            task.verifying = false;
+            
+            // Esconder indicador de verificação
+            const verifyingElement = taskId === 'task1' ? verifying1 : verifying2;
+            verifyingElement.style.display = 'none';
+            
+            // Atualizar progresso
+            task.progress++;
+            
+            // Atualizar contador do WhatsApp
+            if (taskId === 'task1') {
+                whatsappCounter.textContent = `${task.progress}/5`;
+                whatsappCounter.innerHTML = `<span class="active">${task.progress}</span>/5`;
+            }
+            
+            // Verificar se a tarefa está completa
+            if (task.progress >= task.max) {
+                task.completed = true;
+                state.balance += task.reward;
+                
+                // Habilitar próxima tarefa
+                if (taskId === 'task1') {
+                    unlockTask(2);
+                }
+            }
+            
+            // Atualizar UI
+            updateUI();
+            saveState();
+            
+            // Reativar botão
+            const button = taskId === 'task1' ? btnTask1 : btnTask2;
+            button.disabled = false;
+            
+            if (task.completed) {
+                button.innerHTML = `<i class="fas fa-check"></i> Concluído`;
+                button.className = 'btn btn-completed';
+                button.disabled = true;
+                
+                // Adicionar badge de concluído
+                const taskCard = document.getElementById(`task${taskId === 'task1' ? '1' : '2'}`);
+                if (!taskCard.querySelector('.status-badge')) {
+                    const badge = document.createElement('div');
+                    badge.className = 'status-badge';
+                    badge.innerHTML = '<i class="fas fa-check"></i> Concluído';
+                    taskCard.appendChild(badge);
+                }
+            } else if (taskId === 'task1') {
+                button.innerHTML = `<i class="fab fa-whatsapp"></i> Compartilhar Novamente (${task.progress}/5)`;
+            }
+        }
+        
+        // Desbloquear tarefa
+        function unlockTask(taskNumber) {
+            const taskCard = document.getElementById(`task${taskNumber}`);
+            const button = document.getElementById(`btn-task${taskNumber}`);
+            
+            taskCard.classList.remove('locked');
+            button.disabled = false;
+        }
+        
+        // Atualizar interface
+        function updateUI() {
+            // Atualizar saldo
+            balanceElement.textContent = state.balance;
+            
+            // Atualizar barras de progresso
+            progress1.style.width = `${(state.tasks.task1.progress / state.tasks.task1.max) * 100}%`;
+            progress2.style.width = `${(state.tasks.task2.progress / state.tasks.task2.max) * 100}%`;
+            
+            // Atualizar estado dos botões
+            if (state.tasks.task1.completed) {
+                task1Card.classList.add('completed');
+            }
+            
+            if (state.tasks.task2.completed) {
+                task2Card.classList.add('completed');
+            }
+            
+            // Atualizar botão de levantar dinheiro
+            if (state.tasks.task1.completed && state.tasks.task2.completed) {
+                withdrawCard.classList.add('active');
+                withdrawAmount.textContent = "20 MT";
+                btnWithdraw.disabled = false;
+                btnWithdraw.innerHTML = `<i class="fas fa-money-check-alt"></i> Levantar 20 MT Agora`;
+            } else {
+                const completedTasks = (state.tasks.task1.completed ? 1 : 0) + (state.tasks.task2.completed ? 1 : 0);
+                withdrawAmount.textContent = `${state.balance} MT`;
+                btnWithdraw.innerHTML = `<i class="fas fa-lock"></i> ${completedTasks}/2 tarefas concluídas`;
+            }
+        }
+        
+        // Salvar estado
+        function saveState() {
+            localStorage.setItem('tasksState', JSON.stringify(state));
+        }
+        
+        // Carregar estado
+        function loadState() {
+            const saved = localStorage.getItem('tasksState');
+            if (saved) {
+                const savedState = JSON.parse(saved);
+                Object.assign(state, savedState);
+                
+                // Desbloquear tarefas baseado no estado salvo
+                if (state.tasks.task1.progress > 0) {
+                    whatsappCounter.innerHTML = `<span class="active">${state.tasks.task1.progress}</span>/5`;
+                    if (!state.tasks.task1.completed) {
+                        unlockTask(2);
+                    }
+                }
+                
+                if (state.tasks.task2.progress > 0 && state.tasks.task1.completed) {
+                    unlockTask(2);
+                }
+            }
+        }
+        
+        // Inicializar quando o DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
