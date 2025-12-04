@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claim Money | Ganhe 20MT</title>
+    <title>Claim Money | Ganhe 50MT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
     <style>
@@ -357,7 +357,7 @@
                 <div class="logo-icon">
                     <i class="fas fa-coins"></i>
                 </div>
-                <h1>Ganhe 20MT</h1>
+                <h1>Ganhe 50MT</h1>
             </div>
             <p class="subtitle">Complete as tarefas para receber seu dinheiro</p>
         </header>
@@ -379,7 +379,7 @@
                         <div class="task-number">1</div>
                         <div class="task-name">Partilhar no WhatsApp</div>
                     </div>
-                    <div class="task-reward">10 MT</div>
+                    <div class="task-reward">20 MT</div>
                 </div>
                 <p class="task-description">Compartilhe nosso link em 5 grupos ou conversas do WhatsApp.</p>
                 
@@ -408,7 +408,7 @@
                         <div class="task-number">2</div>
                         <div class="task-name">Fazer Cadastro</div>
                     </div>
-                    <div class="task-reward">10 MT</div>
+                    <div class="task-reward">30 MT</div>
                 </div>
                 <p class="task-description">Cadastre-se na nossa plataforma para validar sua conta.</p>
                 
@@ -506,7 +506,7 @@
                 if (state.tasks.task1.verifying || state.tasks.task1.completed) return;
                 
                 // Abrir WhatsApp
-                const text = "Olá! Encontrei este site onde você pode ganhar 20MT completando apenas 2tarefas 5 minutos! Experimente: https://claim-money.vercel.app";
+                const text = "Olá! Encontrei este site onde você pode ganhar 50MT completando apenas 2 tarefas 5 minutos! Experimente: https://claim-money.vercel.app";
                 const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
                 window.open(url, '_blank');
                 
@@ -639,9 +639,9 @@
             // Atualizar botão de levantar dinheiro
             if (state.tasks.task1.completed && state.tasks.task2.completed) {
                 withdrawCard.classList.add('active');
-                withdrawAmount.textContent = "20 MT";
+                withdrawAmount.textContent = "50 MT";
                 btnWithdraw.disabled = false;
-                btnWithdraw.innerHTML = `<i class="fas fa-money-check-alt"></i> Levantar 20 MT Agora`;
+                btnWithdraw.innerHTML = `<i class="fas fa-money-check-alt"></i> Levantar 50 MT Agora`;
             } else {
                 const completedTasks = (state.tasks.task1.completed ? 1 : 0) + (state.tasks.task2.completed ? 1 : 0);
                 withdrawAmount.textContent = `${state.balance} MT`;
